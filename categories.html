@@ -56,6 +56,23 @@
         }
 
         /* =========================================
+           YouTube Style Top Loading Bar
+           ========================================= */
+        #top-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            box-shadow: 0 0 10px rgba(79, 140, 255, 0.8), 0 0 5px var(--accent-primary);
+            z-index: 99999;
+            transition: width 0.25s ease, opacity 0.4s ease;
+            pointer-events: none;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* =========================================
            Navbar (Shared)
            ========================================= */
         header {
@@ -192,6 +209,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 22px;
         }
 
         .cat-info h3 {
@@ -214,7 +232,7 @@
             margin-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 10px;
-            display: none; /* Hidden until category is selected */
+            display: none;
         }
 
         .app-grid {
@@ -335,6 +353,9 @@
 </head>
 <body>
 
+    <!-- YouTube Style Top Progress Bar -->
+    <div id="top-progress-bar"></div>
+
     <!-- Header & Navigation -->
     <header>
         <div class="container navbar">
@@ -356,7 +377,7 @@
 
             <form class="search-form" id="search-form">
                 <input type="text" id="search-input" placeholder="Search apps..." required>
-                <button type="submit">
+                <button type="submit" aria-label="Search">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
             </form>
@@ -392,51 +413,87 @@
         </div>
     </footer>
 
-    <!-- JavaScript & Firebase Integration -->
+    <!-- JavaScript & Supabase Integration -->
     <script type="module">
-        import { db } from './js/firebase-init.js';
-        import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { supabase } from './js/supabase-init.js';
 
+        // Set Dynamic Year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Top YouTube-style Progress Bar Controller
+        const progressBar = document.getElementById('top-progress-bar');
+        
+        function setProgress(percent) {
+            if (!progressBar) return;
+            progressBar.style.opacity = '1';
+            progressBar.style.width = `${percent}%`;
+            if (percent >= 100) {
+                setTimeout(() => {
+                    progressBar.style.opacity = '0';
+                    setTimeout(() => { progressBar.style.width = '0%'; }, 350);
+                }, 200);
+            }
+        }
+
+        // Animate on navigation link click
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !link.target) {
+                    setProgress(60);
+                }
+            });
+        });
 
         // Search Form
         document.getElementById('search-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const queryVal = document.getElementById('search-input').value.trim();
             if (queryVal) {
+                setProgress(70);
                 window.location.href = `search.html?q=${encodeURIComponent(queryVal)}`;
             }
         });
 
-        // Predefined Ecosystem Categories with SVG Icons
-        const CATEGORIES = [
-            { name: 'AI', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path><path d="M4 12a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2 2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path><path d="M20 12a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2 2 2 0 0 1 2-2h2a2 2 0 0 1 2 2z"></path><path d="M12 22a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2 2 2 0 0 1 2 2v2a2 2 0 0 1-2 2z"></path><circle cx="12" cy="12" r="2"></circle></svg>' },
-            { name: 'Productivity', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>' },
-            { name: 'Utility', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>' },
-            { name: 'Security', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' },
-            { name: 'Developer Tools', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' },
-            { name: 'Education', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>' },
-            { name: 'Music', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>' },
-            { name: 'Entertainment', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>' }
+        // Default Fallback Categories with Icons
+        const DEFAULT_CATEGORIES = [
+            { id: 'ai', name: 'AI', icon: '🤖' },
+            { id: 'productivity', name: 'Productivity', icon: '⚡' },
+            { id: 'utility', name: 'Utility', icon: '🛠️' },
+            { id: 'security', name: 'Security', icon: '🛡️' },
+            { id: 'developer-tools', name: 'Developer Tools', icon: '💻' },
+            { id: 'education', name: 'Education', icon: '📚' },
+            { id: 'music', name: 'Music', icon: '🎵' },
+            { id: 'entertainment', name: 'Entertainment', icon: '🎬' }
         ];
 
+        let globalCategoriesList = [];
         let globalAppsList = [];
 
-        // Fetch apps and render categories
+        // Fetch Categories and Published Apps from Supabase
         async function initCategoriesPage() {
+            setProgress(30);
             try {
-                // Fetch all apps to calculate counts and enable fast filtering
-                const appsRef = collection(db, "apps");
-                const q = query(appsRef, where("published", "==", true));
-                const querySnapshot = await getDocs(q);
-                
-                querySnapshot.forEach((doc) => {
-                    globalAppsList.push({ id: doc.id, ...doc.data() });
-                });
+                // Parallel fetch for categories & published apps
+                const [catsRes, appsRes] = await Promise.all([
+                    supabase.from('categories').select('*').eq('enabled', true).order('display_order', { ascending: true }),
+                    supabase.from('apps').select('*').eq('published', true)
+                ]);
+
+                setProgress(70);
+
+                if (catsRes.data && catsRes.data.length > 0) {
+                    globalCategoriesList = catsRes.data;
+                } else {
+                    globalCategoriesList = DEFAULT_CATEGORIES;
+                }
+
+                globalAppsList = appsRes.data || [];
 
                 document.getElementById('loading-container').style.display = 'none';
                 
                 renderCategoryGrid();
+                setProgress(100);
                 
                 // Check if a category was passed in URL (e.g., categories.html?category=AI)
                 const urlParams = new URLSearchParams(window.location.search);
@@ -447,28 +504,39 @@
                 }
 
             } catch (error) {
-                console.error("Error fetching apps for categories:", error);
+                console.error("Error fetching categories and apps:", error);
+                setProgress(100);
                 document.getElementById('loading-container').innerHTML = `<span class="error-text">Failed to load ecosystem data. Please try again.</span>`;
             }
         }
 
-        // Render the static categories with dynamic counts
+        // Render the categories with dynamic app counts
         function renderCategoryGrid() {
             const grid = document.getElementById('category-grid');
             grid.style.display = 'grid';
             let html = '';
 
-            CATEGORIES.forEach(cat => {
-                // Count apps in this category
-                const count = globalAppsList.filter(app => app.category && app.category.toLowerCase() === cat.name.toLowerCase()).length;
+            globalCategoriesList.forEach(cat => {
+                const catName = cat.name || cat.id;
+                const catId = cat.id || cat.name;
                 
+                // Count apps in this category
+                const count = globalAppsList.filter(app => 
+                    app.category && (
+                        app.category.toLowerCase() === catName.toLowerCase() ||
+                        app.category.toLowerCase() === catId.toLowerCase()
+                    )
+                ).length;
+                
+                const iconHtml = cat.icon ? cat.icon : '📁';
+
                 html += `
-                    <div class="category-card" data-category="${cat.name}" onclick="selectCategory('${cat.name}')">
+                    <div class="category-card" data-category="${catName}" onclick="selectCategory('${catName}', '${catId}')">
                         <div class="cat-icon">
-                            ${cat.icon}
+                            ${iconHtml}
                         </div>
                         <div class="cat-info">
-                            <h3>${cat.name}</h3>
+                            <h3>${catName}</h3>
                             <p>${count} App${count !== 1 ? 's' : ''}</p>
                         </div>
                     </div>
@@ -480,11 +548,11 @@
 
         // App Card Generator
         function createAppCard(app) {
-            const icon = app.iconUrl || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="%23111827"><rect width="70" height="70"/></svg>';
+            const icon = app.icon_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="%23111827"><rect width="70" height="70"/></svg>';
             const name = app.name || 'Unknown App';
-            const shortDesc = app.shortDescription || 'No description available.';
+            const shortDesc = app.short_description || 'No description available.';
             const rating = app.rating ? `★ ${app.rating}` : 'New';
-            const size = app.apkSize ? `• ${app.apkSize}` : '';
+            const size = app.apk_size ? `• ${app.apk_size}` : '';
 
             return `
                 <a href="app.html?id=${app.id}" class="app-card">
@@ -507,7 +575,9 @@
         }
 
         // Handle category selection
-        window.selectCategory = function(categoryName) {
+        window.selectCategory = function(categoryName, categoryId = null) {
+            setProgress(60);
+
             // Update URL without refreshing
             const newUrl = new URL(window.location);
             newUrl.searchParams.set('category', categoryName);
@@ -515,7 +585,7 @@
 
             // Update UI Active State
             document.querySelectorAll('.category-card').forEach(card => {
-                if (card.dataset.category.toLowerCase() === categoryName.toLowerCase()) {
+                if (card.dataset.category && card.dataset.category.toLowerCase() === categoryName.toLowerCase()) {
                     card.classList.add('active');
                 } else {
                     card.classList.remove('active');
@@ -523,7 +593,12 @@
             });
 
             // Filter Apps
-            const filteredApps = globalAppsList.filter(app => app.category && app.category.toLowerCase() === categoryName.toLowerCase());
+            const filteredApps = globalAppsList.filter(app => 
+                app.category && (
+                    app.category.toLowerCase() === categoryName.toLowerCase() ||
+                    (categoryId && app.category.toLowerCase() === categoryId.toLowerCase())
+                )
+            );
             
             // Update Results Section
             const header = document.getElementById('results-header');
@@ -541,6 +616,8 @@
                 });
                 container.innerHTML = html;
             }
+
+            setProgress(100);
 
             // Smooth scroll to results
             header.scrollIntoView({ behavior: 'smooth', block: 'start' });

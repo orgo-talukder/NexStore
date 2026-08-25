@@ -56,6 +56,23 @@
         }
 
         /* =========================================
+           YouTube Style Top Loading Bar
+           ========================================= */
+        #top-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            box-shadow: 0 0 10px rgba(79, 140, 255, 0.8), 0 0 5px var(--accent-primary);
+            z-index: 99999;
+            transition: width 0.25s ease, opacity 0.4s ease;
+            pointer-events: none;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* =========================================
            Navbar (Shared)
            ========================================= */
         header {
@@ -315,6 +332,9 @@
 </head>
 <body>
 
+    <!-- YouTube Style Top Progress Bar -->
+    <div id="top-progress-bar"></div>
+
     <!-- Header & Navigation -->
     <header>
         <div class="container navbar">
@@ -336,7 +356,7 @@
 
             <form class="search-form" id="search-form">
                 <input type="text" id="search-input" placeholder="Search apps..." required>
-                <button type="submit">
+                <button type="submit" aria-label="Search">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
             </form>
@@ -374,18 +394,44 @@
         </div>
     </footer>
 
-    <!-- JavaScript & Firebase Integration -->
+    <!-- JavaScript & Supabase Integration -->
     <script type="module">
-        import { db } from './js/firebase-init.js';
-        import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { supabase } from './js/supabase-init.js';
 
+        // Set Dynamic Year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Top YouTube-style Progress Bar Controller
+        const progressBar = document.getElementById('top-progress-bar');
+        
+        function setProgress(percent) {
+            if (!progressBar) return;
+            progressBar.style.opacity = '1';
+            progressBar.style.width = `${percent}%`;
+            if (percent >= 100) {
+                setTimeout(() => {
+                    progressBar.style.opacity = '0';
+                    setTimeout(() => { progressBar.style.width = '0%'; }, 350);
+                }, 200);
+            }
+        }
+
+        // Animate on navigation link click
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !link.target) {
+                    setProgress(60);
+                }
+            });
+        });
 
         // Handle Navbar Search Form
         document.getElementById('search-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const queryVal = document.getElementById('search-input').value.trim();
             if (queryVal) {
+                setProgress(70);
                 window.location.href = `search.html?q=${encodeURIComponent(queryVal)}`;
             }
         });
@@ -397,6 +443,7 @@
                 e.preventDefault();
                 const queryVal = document.getElementById('big-search-input').value.trim();
                 if (queryVal) {
+                    setProgress(70);
                     window.location.href = `search.html?q=${encodeURIComponent(queryVal)}`;
                 }
             });
@@ -404,11 +451,11 @@
 
         // App Card Generator
         function createAppCard(app) {
-            const icon = app.iconUrl || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="%23111827"><rect width="70" height="70"/></svg>';
+            const icon = app.icon_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="%23111827"><rect width="70" height="70"/></svg>';
             const name = app.name || 'Unknown App';
-            const shortDesc = app.shortDescription || 'No description available.';
+            const shortDesc = app.short_description || 'No description available.';
             const rating = app.rating ? `★ ${app.rating}` : 'New';
-            const size = app.apkSize ? `• ${app.apkSize}` : '';
+            const size = app.apk_size ? `• ${app.apk_size}` : '';
 
             return `
                 <a href="app.html?id=${app.id}" class="app-card">
@@ -431,6 +478,7 @@
         }
 
         async function performSearch() {
+            setProgress(30);
             const container = document.getElementById('search-results-container');
             const urlParams = new URLSearchParams(window.location.search);
             const searchQuery = urlParams.get('q');
@@ -439,6 +487,7 @@
             if (!searchQuery || searchQuery.trim() === '') {
                 document.getElementById('no-query-header').style.display = 'block';
                 container.innerHTML = '';
+                setProgress(100);
                 return;
             }
 
@@ -447,28 +496,30 @@
             // Setup UI for searching
             document.getElementById('page-header').style.display = 'block';
             document.getElementById('query-display').textContent = searchQuery;
-            document.getElementById('search-input').value = searchQuery; // Populate nav search box
+            document.getElementById('search-input').value = searchQuery;
             container.innerHTML = `<div class="status-container loading-text">Searching ecosystem...</div>`;
 
             try {
-                // Fetch apps
-                const appsRef = collection(db, "apps");
-                const q = query(appsRef, where("published", "==", true));
-                const querySnapshot = await getDocs(q);
-                
-                const allApps = [];
-                querySnapshot.forEach((doc) => {
-                    allApps.push({ id: doc.id, ...doc.data() });
-                });
+                setProgress(65);
 
-                // Client-side text filtering
-                const searchResults = allApps.filter(app => {
+                // Fetch published apps from Supabase
+                const { data: allApps, error } = await supabase
+                    .from('apps')
+                    .select('*')
+                    .eq('published', true);
+
+                if (error) throw error;
+
+                // Client-side text filtering across all relevant fields
+                const searchResults = (allApps || []).filter(app => {
                     const matchName = app.name && app.name.toLowerCase().includes(cleanQuery);
-                    const matchShortDesc = app.shortDescription && app.shortDescription.toLowerCase().includes(cleanQuery);
+                    const matchShortDesc = app.short_description && app.short_description.toLowerCase().includes(cleanQuery);
                     const matchDesc = app.description && app.description.toLowerCase().includes(cleanQuery);
                     const matchCategory = app.category && app.category.toLowerCase().includes(cleanQuery);
-                    
-                    return matchName || matchShortDesc || matchDesc || matchCategory;
+                    const matchPackage = app.package_name && app.package_name.toLowerCase().includes(cleanQuery);
+                    const matchKeywords = Array.isArray(app.keywords) && app.keywords.some(k => k.toLowerCase().includes(cleanQuery));
+
+                    return matchName || matchShortDesc || matchDesc || matchCategory || matchPackage || matchKeywords;
                 });
 
                 // Update UI based on results
@@ -478,7 +529,7 @@
                     container.innerHTML = `
                         <div class="status-container empty-text">
                             No apps found matching "${searchQuery}".<br>
-                            Try using different keywords or check our Categories.
+                            Try using different keywords or check our <a href="categories.html" style="color:var(--accent-primary);">Categories</a>.
                         </div>`;
                 } else {
                     let html = '';
@@ -488,8 +539,11 @@
                     container.innerHTML = html;
                 }
 
+                setProgress(100);
+
             } catch (error) {
                 console.error("Error searching apps:", error);
+                setProgress(100);
                 container.innerHTML = `<div class="status-container error-text">Unable to perform search right now. Please try again later.</div>`;
             }
         }

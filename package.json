@@ -1,0 +1,9 @@
+{
+  "name": "nexstore-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NexStore - Official Public App Marketplace",
+  "scripts": {
+    "build": "node build.js"
+  }
+}
