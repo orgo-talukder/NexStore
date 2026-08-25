@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexStore | Official App Ecosystem</title>
     
-    <!-- Favicon (Tab Icon Unchanged) -->
+    <!-- Favicon (Tab Icon) -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/LDsrNcxr/20260825-191156.png">
     
     <!-- Google Fonts: Inter & Outfit -->
@@ -18,12 +18,12 @@
            Design System & Premium Marketplace Theme
            ========================================= */
         :root {
-            --bg-primary: #070A12;
-            --bg-card: #0F172A;
-            --bg-card-hover: #15213D;
-            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-primary: #060911;
+            --bg-card: #0E1626;
+            --bg-card-hover: #15223C;
+            --bg-glass: rgba(14, 22, 38, 0.85);
             --accent-primary: #3B82F6;
-            --accent-secondary: #6366F1;
+            --accent-secondary: #8B5CF6;
             --accent-gradient: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
             --text-primary: #F8FAFC;
             --text-secondary: #94A3B8;
@@ -31,19 +31,19 @@
             --success: #10B981;
             --star: #F59E0B;
             --error: #EF4444;
-            --border-color: rgba(255, 255, 255, 0.07);
-            --border-hover: rgba(59, 130, 246, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(59, 130, 246, 0.45);
             
             --font-main: 'Inter', sans-serif;
             --font-heading: 'Outfit', sans-serif;
-            --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-            --radius-xl: 20px;
-            --radius-lg: 16px;
-            --radius-md: 12px;
-            --radius-sm: 8px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-xl: 24px;
+            --radius-lg: 18px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
         }
 
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -57,17 +57,19 @@
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.06) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 45%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 30%, rgba(56, 189, 248, 0.04) 0px, transparent 60%);
+            min-height: 100vh;
         }
 
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
         .container {
-            max-width: 1260px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         /* =========================================
@@ -80,7 +82,7 @@
             height: 3px;
             width: 0%;
             background: linear-gradient(90deg, #38BDF8, #3B82F6, #8B5CF6);
-            box-shadow: 0 0 14px rgba(59, 130, 246, 0.9), 0 0 5px #38BDF8;
+            box-shadow: 0 0 16px rgba(59, 130, 246, 0.9), 0 0 6px #38BDF8;
             z-index: 999999;
             transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
             pointer-events: none;
@@ -92,8 +94,8 @@
            ========================================= */
         header {
             background-color: var(--bg-glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
@@ -105,10 +107,9 @@
             justify-content: space-between;
             align-items: center;
             min-height: 80px;
-            padding: 6px 0;
+            padding: 8px 0;
         }
 
-        /* New Brand Logo */
         .brand {
             display: flex;
             align-items: center;
@@ -117,8 +118,8 @@
         }
 
         .brand-logo {
-            height: 58px;
-            max-height: 64px;
+            height: 52px;
+            max-height: 60px;
             width: auto;
             object-fit: contain;
             display: block;
@@ -133,7 +134,7 @@
 
         .nav-links {
             display: flex;
-            gap: 28px;
+            gap: 32px;
         }
 
         .nav-links a {
@@ -142,7 +143,7 @@
             color: var(--text-secondary);
             transition: var(--transition);
             position: relative;
-            padding: 6px 0;
+            padding: 8px 0;
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -155,32 +156,34 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 2px;
+            height: 2.5px;
             background: var(--accent-gradient);
-            border-radius: 2px;
+            border-radius: 4px;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
         }
 
         .search-form {
             display: flex;
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(10, 15, 26, 0.75);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
-            width: 260px;
+            width: 280px;
             transition: var(--transition);
         }
 
         .search-form:focus-within {
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
             background: var(--bg-card);
+            width: 310px;
         }
 
         .search-form input {
             background: transparent;
             border: none;
             color: var(--text-primary);
-            padding: 9px 15px;
+            padding: 10px 16px;
             width: 100%;
             outline: none;
             font-family: var(--font-main);
@@ -193,7 +196,7 @@
             background: transparent;
             border: none;
             color: var(--text-secondary);
-            padding: 0 14px;
+            padding: 0 16px;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
@@ -204,29 +207,29 @@
         .search-form button:hover { color: var(--accent-primary); }
 
         /* =========================================
-           Hero Slider (Uptodown Style Carousel)
+           Hero Spotlight Carousel (App Store Style)
            ========================================= */
         .hero-slider-section {
-            margin-top: 24px;
+            margin-top: 28px;
             position: relative;
         }
 
         .slider-wrapper {
             position: relative;
             width: 100%;
-            height: 400px;
+            height: 440px;
             border-radius: var(--radius-xl);
             overflow: hidden;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 24px 50px -15px rgba(0, 0, 0, 0.7);
         }
 
         .slider-track {
             display: flex;
             width: 100%;
             height: 100%;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .slide-item {
@@ -245,82 +248,86 @@
             width: 100%; height: 100%;
             object-fit: cover;
             object-position: center;
-            transition: transform 6s ease;
+            transition: transform 8s ease;
         }
 
         .slide-item:hover .slide-bg-img {
-            transform: scale(1.03);
+            transform: scale(1.04);
         }
 
         .slide-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(0deg, rgba(7, 10, 18, 0.95) 0%, rgba(7, 10, 18, 0.4) 50%, rgba(7, 10, 18, 0.1) 100%),
-                        linear-gradient(90deg, rgba(7, 10, 18, 0.8) 0%, transparent 60%);
+            background: 
+                linear-gradient(0deg, rgba(6, 9, 17, 0.98) 0%, rgba(6, 9, 17, 0.5) 45%, rgba(6, 9, 17, 0.1) 100%),
+                linear-gradient(90deg, rgba(6, 9, 17, 0.9) 0%, transparent 65%);
         }
 
         .slide-content {
             position: relative;
             z-index: 10;
-            padding: 40px;
-            max-width: 650px;
+            padding: 48px;
+            max-width: 700px;
         }
 
         .slide-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 11.5px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: var(--accent-gradient);
-            color: #fff;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+            letter-spacing: 0.8px;
+            background: rgba(59, 130, 246, 0.18);
+            color: #60A5FA;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            backdrop-filter: blur(12px);
+            margin-bottom: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
         }
 
         .slide-title {
             font-family: var(--font-heading);
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            line-height: 1.2;
-            margin-bottom: 8px;
+            line-height: 1.15;
+            margin-bottom: 10px;
             color: #fff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-shadow: 0 4px 16px rgba(0,0,0,0.6);
         }
 
         .slide-subtitle {
             font-size: 15px;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            line-height: 1.5;
+            max-width: 580px;
         }
 
         .slide-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: #fff;
-            color: #070A12;
+            gap: 10px;
+            background: var(--accent-gradient);
+            color: #fff;
             font-weight: 700;
-            font-size: 14px;
-            padding: 10px 22px;
-            border-radius: 10px;
+            font-size: 14.5px;
+            padding: 12px 26px;
+            border-radius: 12px;
             transition: var(--transition);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
         }
 
         .slide-btn:hover {
-            background: var(--accent-primary);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.6);
         }
 
         /* Slider Controls */
@@ -328,11 +335,11 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(8px);
+            background: rgba(14, 22, 38, 0.7);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             color: #fff;
             display: flex;
@@ -346,16 +353,17 @@
         .slider-btn:hover {
             background: var(--accent-primary);
             border-color: var(--accent-primary);
-            transform: translateY(-50%) scale(1.08);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
         }
 
-        .slider-btn.prev { left: 18px; }
-        .slider-btn.next { right: 18px; }
+        .slider-btn.prev { left: 24px; }
+        .slider-btn.next { right: 24px; }
 
         .slider-dots {
             position: absolute;
-            bottom: 18px;
-            right: 30px;
+            bottom: 24px;
+            right: 36px;
             display: flex;
             gap: 8px;
             z-index: 20;
@@ -365,16 +373,53 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
             cursor: pointer;
             transition: var(--transition);
         }
 
         .dot.active {
-            width: 24px;
+            width: 28px;
             border-radius: 10px;
             background: var(--accent-primary);
-            box-shadow: 0 0 10px var(--accent-primary);
+            box-shadow: 0 0 12px var(--accent-primary);
+        }
+
+        /* =========================================
+           Quick Category Scroll Pills Bar
+           ========================================= */
+        .category-pills-bar {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 24px 0 8px 0;
+            scrollbar-width: none;
+        }
+
+        .category-pills-bar::-webkit-scrollbar { display: none; }
+
+        .cat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .cat-pill:hover, .cat-pill.active {
+            background: rgba(59, 130, 246, 0.12);
+            border-color: var(--accent-primary);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
         }
 
         /* =========================================
@@ -383,19 +428,20 @@
         .section-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end;
             margin-top: 48px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .section-title {
             font-family: var(--font-heading);
-            font-size: 22px;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: 800;
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #fff;
         }
 
         .section-title svg { color: var(--accent-primary); }
@@ -403,7 +449,7 @@
         .view-all-link {
             color: var(--accent-primary);
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 4px;
@@ -412,15 +458,15 @@
 
         .view-all-link:hover {
             color: #60A5FA;
-            transform: translateX(3px);
+            transform: translateX(4px);
         }
 
         /* =========================================
-           Top Downloads (Ranked 1, 2, 3... 10)
+           Top 10 Ranked Downloads (Leaderboard)
            ========================================= */
         .top-ranked-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
             gap: 16px;
         }
 
@@ -436,13 +482,14 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
         }
 
         .ranked-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             border-color: var(--border-hover);
             background: var(--bg-card-hover);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
         }
 
         .rank-number {
@@ -452,19 +499,18 @@
             line-height: 1;
             width: 32px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.18);
             transition: var(--transition);
             flex-shrink: 0;
         }
 
         .ranked-card:hover .rank-number {
-            color: var(--accent-primary);
-            transform: scale(1.1);
+            transform: scale(1.12);
         }
 
-        .ranked-card:nth-child(1) .rank-number { color: #F59E0B; text-shadow: 0 0 12px rgba(245, 158, 11, 0.4); }
-        .ranked-card:nth-child(2) .rank-number { color: #94A3B8; }
-        .ranked-card:nth-child(3) .rank-number { color: #D97706; }
+        .ranked-card:nth-child(1) .rank-number { color: #F59E0B; text-shadow: 0 0 14px rgba(245, 158, 11, 0.5); }
+        .ranked-card:nth-child(2) .rank-number { color: #94A3B8; text-shadow: 0 0 12px rgba(148, 163, 184, 0.4); }
+        .ranked-card:nth-child(3) .rank-number { color: #D97706; text-shadow: 0 0 12px rgba(217, 119, 6, 0.4); }
 
         .ranked-icon {
             width: 52px;
@@ -474,6 +520,7 @@
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
             flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .ranked-info {
@@ -482,12 +529,13 @@
         }
 
         .ranked-name {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 14.5px;
+            font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             margin-bottom: 4px;
+            color: #fff;
         }
 
         .ranked-meta {
@@ -499,48 +547,49 @@
         }
 
         /* =========================================
-           Landscape / Wide Cards (Promos)
+           Landscape / Editorial Highlight Cards
            ========================================= */
         .landscape-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 20px;
         }
 
         .landscape-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             transition: var(--transition);
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
         }
 
         .landscape-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             border-color: var(--border-hover);
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(59, 130, 246, 0.3);
         }
 
         .landscape-thumb {
             width: 100%;
-            height: 155px;
+            height: 165px;
             object-fit: cover;
             background: #000;
             border-bottom: 1px solid var(--border-color);
-            transition: transform 0.4s ease;
+            transition: transform 0.5s ease;
         }
 
         .landscape-card:hover .landscape-thumb {
-            transform: scale(1.03);
+            transform: scale(1.04);
         }
 
         .landscape-body {
-            padding: 16px;
+            padding: 18px;
             display: flex;
-            gap: 12px;
+            gap: 14px;
             align-items: center;
             background: var(--bg-card);
             position: relative;
@@ -548,12 +597,13 @@
         }
 
         .landscape-icon {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
             object-fit: cover;
             border: 1px solid var(--border-color);
             flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .landscape-info {
@@ -563,15 +613,16 @@
 
         .landscape-title {
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 2px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            color: #fff;
         }
 
         .landscape-desc {
-            font-size: 12px;
+            font-size: 12.5px;
             color: var(--text-muted);
             white-space: nowrap;
             overflow: hidden;
@@ -579,105 +630,176 @@
         }
 
         /* =========================================
-           Standard App Grid & Cards
+           Standard Big Tech App Cards (Redesigned)
            ========================================= */
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
         }
 
         .app-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 18px;
+            border-radius: var(--radius-lg);
+            padding: 20px;
             display: flex;
-            gap: 16px;
+            flex-direction: column;
+            justify-content: space-between;
             transition: var(--transition);
             cursor: pointer;
+            position: relative;
+            min-height: 185px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
 
         .app-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             border-color: var(--border-hover);
             background: var(--bg-card-hover);
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 18px 36px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.25);
+        }
+
+        .app-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 12px;
         }
 
         .app-icon {
-            width: 66px;
-            height: 66px;
+            width: 64px;
+            height: 64px;
             border-radius: 16px;
             object-fit: cover;
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             flex-shrink: 0;
             transition: transform 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
         }
 
         .app-card:hover .app-icon {
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
 
-        .app-info {
+        .app-header-info {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             min-width: 0;
+        }
+
+        .app-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
         }
 
         .app-title {
             font-family: var(--font-heading);
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 3px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 1.2;
         }
 
         .official-badge {
             color: var(--success);
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .app-category-tag {
+            display: inline-block;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            background: rgba(59, 130, 246, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .app-desc {
-            font-size: 12.5px;
+            font-size: 13px;
             color: var(--text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: 16px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-height: 1.45;
+            line-height: 1.5;
         }
 
-        .app-meta {
+        .app-card-footer {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 11.5px;
-            color: var(--text-muted);
-            font-weight: 500;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto;
+            gap: 8px;
+        }
+
+        .app-meta-pills {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: nowrap;
         }
 
         .meta-pill {
             display: inline-flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             background: rgba(255, 255, 255, 0.04);
-            padding: 2px 7px;
-            border-radius: 5px;
+            padding: 4px 8px;
+            border-radius: 6px;
             border: 1px solid var(--border-color);
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
         }
 
-        .meta-pill.star { color: var(--star); }
-        .meta-pill.cat { color: var(--accent-primary); }
+        .meta-pill.star {
+            color: var(--star);
+            background: rgba(245, 158, 11, 0.08);
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .meta-pill.size {
+            color: var(--text-muted);
+        }
+
+        .get-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-primary);
+            font-size: 12.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .app-card:hover .get-action-btn {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.45);
+        }
 
         /* =========================================
            YouTube Shimmer Skeletons
@@ -685,12 +807,14 @@
         .skeleton-shimmer-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 18px;
+            border-radius: var(--radius-lg);
+            padding: 20px;
             display: flex;
-            gap: 16px;
+            flex-direction: column;
+            justify-content: space-between;
             position: relative;
             overflow: hidden;
+            min-height: 185px;
         }
 
         .shimmer-wave {
@@ -711,34 +835,36 @@
             border-radius: var(--radius-sm);
         }
 
-        .skel-icon { width: 66px; height: 66px; border-radius: 16px; flex-shrink: 0; }
+        .skel-icon { width: 64px; height: 64px; border-radius: 16px; flex-shrink: 0; }
         .skel-line { height: 12px; margin-bottom: 8px; }
-        .skel-line.title { width: 65%; height: 16px; margin-bottom: 10px; }
-        .skel-line.desc { width: 90%; }
-        .skel-line.meta { width: 45%; height: 12px; margin-bottom: 0; margin-top: 4px; }
+        .skel-line.title { width: 75%; height: 18px; margin-bottom: 8px; }
+        .skel-line.tag { width: 40%; height: 12px; margin-bottom: 0; }
+        .skel-line.desc { width: 100%; height: 12px; margin-bottom: 6px; }
+        .skel-line.desc-short { width: 80%; height: 12px; margin-bottom: 14px; }
 
         /* =========================================
            Ecosystem Trust Ribbon
            ========================================= */
         .trust-ribbon {
-            margin-top: 60px;
-            padding: 26px 30px;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(59, 130, 246, 0.06));
+            margin-top: 70px;
+            padding: 30px 36px;
+            background: linear-gradient(135deg, rgba(14, 22, 38, 0.85), rgba(59, 130, 246, 0.08));
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-xl);
             display: flex;
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 24px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
         }
 
         .trust-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 600;
+            gap: 12px;
+            font-size: 14.5px;
+            font-weight: 700;
             color: var(--text-primary);
         }
 
@@ -751,8 +877,8 @@
            Footer
            ========================================= */
         footer {
-            margin-top: 80px;
-            padding: 50px 0;
+            margin-top: 90px;
+            padding: 60px 0;
             background: #04060B;
             border-top: 1px solid var(--border-color);
             text-align: center;
@@ -760,30 +886,30 @@
             font-size: 14px;
         }
 
-        footer p { margin-bottom: 8px; }
+        footer p { margin-bottom: 10px; }
 
         /* =========================================
            Responsive Design
            ========================================= */
         @media (max-width: 900px) {
-            .slider-wrapper { height: 320px; }
-            .slide-title { font-size: 24px; }
-            .slide-content { padding: 24px; }
+            .slider-wrapper { height: 340px; }
+            .slide-title { font-size: 26px; }
+            .slide-content { padding: 28px; }
+            .app-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
             .navbar { flex-wrap: wrap; min-height: auto; padding: 14px 0; gap: 14px; }
-            .brand-logo { height: 48px; max-height: 52px; }
+            .brand-logo { height: 42px; max-height: 48px; }
             .nav-links { order: 3; width: 100%; justify-content: center; gap: 20px; }
             .search-form { order: 2; width: auto; flex: 1; }
-            .slider-wrapper { height: 260px; border-radius: var(--radius-lg); }
-            .slide-content { padding: 18px; }
+            .slider-wrapper { height: 280px; border-radius: var(--radius-lg); }
+            .slide-content { padding: 20px; }
             .slide-title { font-size: 20px; }
             .slide-subtitle { display: none; }
             .slider-btn { display: none; }
             .top-ranked-grid { grid-template-columns: 1fr; }
             .landscape-grid { grid-template-columns: 1fr; }
-            .app-grid { grid-template-columns: 1fr; }
             .trust-ribbon { flex-direction: column; align-items: flex-start; }
         }
     </style>
@@ -796,7 +922,7 @@
     <!-- Header & Navigation -->
     <header>
         <div class="container navbar">
-            <!-- Brand Logo Image (Updated with New Logo) -->
+            <!-- Brand Logo Image -->
             <a href="index.html" class="brand" aria-label="NexStore Home">
                 <img src="https://i.ibb.co/V05G0rcC/IMG-20260825-200138.png" alt="NexStore Logo" class="brand-logo">
             </a>
@@ -819,7 +945,7 @@
 
     <main class="container">
         
-        <!-- Hero Slider Section (Uptodown Style) -->
+        <!-- Hero Spotlight Carousel (App Store Style) -->
         <section class="hero-slider-section" id="hero-slider-section">
             <div class="slider-wrapper" id="slider-wrapper">
                 <!-- Skeleton Shimmer for Hero Slider -->
@@ -828,15 +954,26 @@
                 </div>
             </div>
             <button class="slider-btn prev" id="slider-prev" aria-label="Previous Slide">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </button>
             <button class="slider-btn next" id="slider-next" aria-label="Next Slide">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </button>
             <div class="slider-dots" id="slider-dots"></div>
         </section>
 
-        <!-- Top 10 Ranked Downloads (Uptodown Numbered List) -->
+        <!-- Quick Category Scroll Pills Bar -->
+        <div class="category-pills-bar" id="category-pills-bar">
+            <a href="apps.html" class="cat-pill active">🚀 All Apps</a>
+            <a href="apps.html?category=utility" class="cat-pill">🛠️ Utility</a>
+            <a href="apps.html?category=productivity" class="cat-pill">⚡ Productivity</a>
+            <a href="apps.html?category=tools" class="cat-pill">🔧 Developer Tools</a>
+            <a href="apps.html?category=entertainment" class="cat-pill">🎮 Games & Media</a>
+            <a href="apps.html?category=security" class="cat-pill">🔒 Security</a>
+            <a href="apps.html?category=ai" class="cat-pill">🤖 AI Intelligence</a>
+        </div>
+
+        <!-- Top 10 Ranked Downloads (Numbered Leaderboard) -->
         <section>
             <div class="section-header">
                 <h2 class="section-title">
@@ -850,12 +987,12 @@
             </div>
         </section>
 
-        <!-- Featured Landscape Cards (Wide Thumbnails) -->
+        <!-- Featured Landscape Cards (Editorial Highlight Cards) -->
         <section id="landscape-section" style="display: none;">
             <div class="section-header">
                 <h2 class="section-title">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                    Trending Highlights
+                    Spotlight Highlights
                 </h2>
                 <a href="apps.html" class="view-all-link">Explore All →</a>
             </div>
@@ -867,7 +1004,7 @@
             <div class="section-header">
                 <h2 class="section-title">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                    Latest Updates & Releases
+                    Latest Releases & Updates
                 </h2>
                 <a href="apps.html?sort=newest" class="view-all-link">All New Apps →</a>
             </div>
@@ -881,14 +1018,14 @@
             <div class="section-header">
                 <h2 class="section-title" id="tools-title">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-                    Utility & Tools
+                    Utility & Core Tools
                 </h2>
                 <a href="categories.html" class="view-all-link">Browse Category →</a>
             </div>
             <div id="tools-container" class="app-grid"></div>
         </section>
 
-        <!-- Trust & Quality Ribbon -->
+        <!-- Enterprise Trust & Quality Ribbon -->
         <section class="trust-ribbon">
             <div class="trust-item">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
@@ -900,7 +1037,7 @@
             </div>
             <div class="trust-item">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                Real-Time Version Updates
+                Real-Time Automatic Updates
             </div>
             <div class="trust-item">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
@@ -967,13 +1104,15 @@
             let rankedSkel = '';
             for (let i = 0; i < 5; i++) {
                 rankedSkel += `
-                    <div class="skeleton-shimmer-card" style="padding:14px;border-radius:12px;">
+                    <div class="skeleton-shimmer-card" style="padding:14px;border-radius:12px;min-height:auto;">
                         <div class="shimmer-wave"></div>
-                        <div class="skel-box" style="width:28px;height:28px;border-radius:6px;"></div>
-                        <div class="skel-box skel-icon" style="width:52px;height:52px;"></div>
-                        <div style="flex:1;">
-                            <div class="skel-box skel-line" style="width:70%;height:14px;"></div>
-                            <div class="skel-box skel-line" style="width:40%;height:10px;margin-bottom:0;"></div>
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <div class="skel-box" style="width:28px;height:28px;border-radius:6px;"></div>
+                            <div class="skel-box skel-icon" style="width:52px;height:52px;"></div>
+                            <div style="flex:1;">
+                                <div class="skel-box skel-line" style="width:70%;height:14px;"></div>
+                                <div class="skel-box skel-line" style="width:40%;height:10px;margin-bottom:0;"></div>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -987,11 +1126,23 @@
                 appSkel += `
                     <div class="skeleton-shimmer-card">
                         <div class="shimmer-wave"></div>
-                        <div class="skel-box skel-icon"></div>
-                        <div style="flex:1;">
-                            <div class="skel-box skel-line title"></div>
+                        <div style="display:flex;gap:16px;margin-bottom:12px;">
+                            <div class="skel-box skel-icon"></div>
+                            <div style="flex:1;">
+                                <div class="skel-box skel-line title"></div>
+                                <div class="skel-box skel-line tag"></div>
+                            </div>
+                        </div>
+                        <div>
                             <div class="skel-box skel-line desc"></div>
-                            <div class="skel-box skel-line meta"></div>
+                            <div class="skel-box skel-line desc-short"></div>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);">
+                            <div style="display:flex;gap:8px;">
+                                <div class="skel-box" style="width:45px;height:24px;border-radius:6px;"></div>
+                                <div class="skel-box" style="width:55px;height:24px;border-radius:6px;"></div>
+                            </div>
+                            <div class="skel-box" style="width:50px;height:24px;border-radius:8px;"></div>
                         </div>
                     </div>
                 `;
@@ -1009,31 +1160,62 @@
             return num + '+';
         }
 
-        // --- Standard App Card Component ---
+        function formatCategory(cat) {
+            if (!cat) return 'Utility';
+            return cat.split(/[-_]/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
+
+        function formatSize(size) {
+            if (!size) return 'Direct APK';
+            const strSize = String(size).trim();
+            if (/^\d+(\.\d+)?$/.test(strSize)) return `${strSize} MB`;
+            return strSize;
+        }
+
+        // --- Standard Big Company App Card Component ---
         function createAppCard(app) {
-            const icon = app.icon_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" fill="%230F172A"><rect width="66" height="66"/></svg>';
+            const icon = app.icon_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="%230E1626"><rect width="64" height="64"/></svg>';
             const name = app.name || 'Unknown App';
-            const shortDesc = app.short_description || 'Verified Nex application release.';
-            const rating = app.rating ? `★ ${app.rating}` : '★ 5.0';
-            const size = app.apk_size ? app.apk_size : 'Direct APK';
-            const category = app.category || 'Utility';
+            const shortDesc = app.short_description || 'Verified Nex official application release.';
+            const rating = app.rating ? Number(app.rating).toFixed(1) : '5.0';
+            const size = formatSize(app.apk_size);
+            const category = formatCategory(app.category);
 
             return `
                 <a href="app.html?id=${app.id}" class="app-card">
-                    <img src="${icon}" alt="${name}" class="app-icon" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'66\' height=\'66\' fill=\'%230F172A\'><rect width=\'66\' height=\'66\'/></svg>'">
-                    <div class="app-info">
-                        <div class="app-title">
-                            ${name}
-                            <span class="official-badge" title="Official Verified Build">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <!-- Top Header: Icon + Title + Category Tag -->
+                    <div class="app-card-header">
+                        <img src="${icon}" alt="${name}" class="app-icon" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'64\' height=\'64\' fill=\'%230E1626\'><rect width=\'64\' height=\'64\'/></svg>'">
+                        <div class="app-header-info">
+                            <div class="app-title-wrap">
+                                <h3 class="app-title" title="${name}">${name}</h3>
+                                <span class="official-badge" title="Official Verified Build">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                </span>
+                            </div>
+                            <span class="app-category-tag">${category}</span>
+                        </div>
+                    </div>
+
+                    <!-- Middle Body: Short Description -->
+                    <p class="app-desc">${shortDesc}</p>
+
+                    <!-- Bottom Footer: Rating + Size + Get Button -->
+                    <div class="app-card-footer">
+                        <div class="app-meta-pills">
+                            <span class="meta-pill star">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                ${rating}
+                            </span>
+                            <span class="meta-pill size">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                ${size}
                             </span>
                         </div>
-                        <p class="app-desc">${shortDesc}</p>
-                        <div class="app-meta">
-                            <span class="meta-pill star">${rating}</span>
-                            <span class="meta-pill cat">${category}</span>
-                            <span>${size}</span>
-                        </div>
+                        <span class="get-action-btn">
+                            Get
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </span>
                     </div>
                 </a>
             `;
@@ -1061,10 +1243,10 @@
                 // 1. Render Hero Slider Banners
                 renderHeroSlider(banners, apps);
 
-                // 2. Render Top 10 Ranked Downloads (Uptodown Style)
+                // 2. Render Top 10 Ranked Downloads (Leaderboard)
                 renderTopDownloads(apps);
 
-                // 3. Render Landscape / Wide Promo Highlights
+                // 3. Render Landscape / Spotlight Highlights
                 renderLandscapeCards(apps);
 
                 // 4. Render Latest Updates / Releases
@@ -1093,7 +1275,7 @@
                     title: defaultApp.name || "NexStore Ecosystem",
                     subtitle: defaultApp.short_description || "High-speed, verified APK distribution compiled directly from source repositories.",
                     image_url: defaultApp.banner_url || defaultApp.thumbnail_url || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop",
-                    badge_text: "FEATURED",
+                    badge_text: "FEATURED RELEASE",
                     link_url: defaultApp.id ? `app.html?id=${defaultApp.id}` : "apps.html"
                 }];
             }
@@ -1103,21 +1285,21 @@
 
             banners.forEach((b, idx) => {
                 const link = b.link_url || 'apps.html';
-                const badge = b.badge_text || 'FEATURED';
+                const badge = b.badge_text || 'FEATURED RELEASE';
                 const title = b.title || 'Official Application';
-                const subtitle = b.subtitle || 'Experience the next-generation performance.';
+                const subtitle = b.subtitle || 'Experience next-generation performance compiled directly from source.';
 
                 slidesHtml += `
                     <div class="slide-item" onclick="window.location.href='${link}'">
                         <img src="${b.image_url}" class="slide-bg-img" alt="${title}" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop'">
                         <div class="slide-overlay"></div>
                         <div class="slide-content">
-                            <span class="slide-badge">${badge}</span>
+                            <span class="slide-badge">● ${badge}</span>
                             <h1 class="slide-title">${title}</h1>
                             <p class="slide-subtitle">${subtitle}</p>
                             <a href="${link}" class="slide-btn" onclick="event.stopPropagation();">
-                                Explore Now
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                Explore Application
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
                             </a>
                         </div>
                     </div>
@@ -1147,7 +1329,7 @@
 
             function startAutoSlide() {
                 if (totalSlides > 1) {
-                    slideInterval = setInterval(() => { goToSlide(currentSlide + 1); }, 4500);
+                    slideInterval = setInterval(() => { goToSlide(currentSlide + 1); }, 5000);
                 }
             }
 
@@ -1161,23 +1343,22 @@
             wrapper.addEventListener('mouseleave', () => startAutoSlide());
         }
 
-        // --- 2. Top 10 Ranked Downloads (Uptodown Style) ---
+        // --- 2. Top 10 Ranked Downloads (Leaderboard) ---
         function renderTopDownloads(apps) {
             const container = document.getElementById('top-ranked-container');
             if (!apps || apps.length === 0) {
-                container.innerHTML = `<p style="color:var(--text-muted);grid-column:1/-1;">No apps available.</p>`;
+                container.innerHTML = `<p style="color:var(--text-muted);grid-column:1/-1;">No applications available.</p>`;
                 return;
             }
 
-            // Sort by real download count descending, take top 10
             const rankedApps = [...apps].sort((a, b) => (b.downloads || 0) - (a.downloads || 0)).slice(0, 10);
 
             let html = '';
             rankedApps.forEach((app, index) => {
-                const icon = app.icon_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="%230F172A"><rect width="52" height="52"/></svg>';
+                const icon = app.icon_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="%230E1626"><rect width="52" height="52"/></svg>';
                 const name = app.name || 'Unknown App';
                 const downloads = formatDownloads(app.downloads);
-                const category = app.category || 'App';
+                const category = formatCategory(app.category);
 
                 html += `
                     <a href="app.html?id=${app.id}" class="ranked-card">
@@ -1197,7 +1378,7 @@
             container.innerHTML = html;
         }
 
-        // --- 3. Landscape / Promo Cards (Wide Thumbnails) ---
+        // --- 3. Landscape / Spotlight Highlights ---
         function renderLandscapeCards(apps) {
             const section = document.getElementById('landscape-section');
             const container = document.getElementById('landscape-container');
@@ -1238,7 +1419,7 @@
         function renderLatestApps(apps) {
             const container = document.getElementById('latest-apps-container');
             if (!apps || apps.length === 0) {
-                container.innerHTML = `<div class="status-container">No applications found in the ecosystem.</div>`;
+                container.innerHTML = `<div class="status-container" style="color:var(--text-muted);text-align:center;padding:40px;grid-column:1/-1;">No applications found in the ecosystem.</div>`;
                 return;
             }
 
