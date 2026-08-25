@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexStore | Official App Ecosystem</title>
+    <title>NexStore | Official App Store</title>
     
     <!-- Favicon (Tab Icon) -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/LDsrNcxr/20260825-191156.png">
@@ -104,29 +104,31 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 72px;
+            min-height: 80px;
+            padding: 6px 0;
         }
 
-        /* Brand Logo Image */
+        /* Brand Logo Optimized & Enlarged */
         .brand {
             display: flex;
             align-items: center;
             text-decoration: none;
-            transition: var(--transition);
+            padding: 4px 0;
         }
 
         .brand-logo {
-            height: 42px;
-            max-height: 46px;
+            height: 58px;
+            max-height: 64px;
             width: auto;
             object-fit: contain;
             display: block;
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.35));
             transition: var(--transition);
         }
 
         .brand-logo:hover {
-            transform: scale(1.03);
-            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.4));
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 18px rgba(59, 130, 246, 0.65));
         }
 
         .nav-links {
@@ -770,8 +772,8 @@
         }
 
         @media (max-width: 768px) {
-            .navbar { flex-wrap: wrap; height: auto; padding: 14px 0; gap: 14px; }
-            .brand-logo { height: 36px; }
+            .navbar { flex-wrap: wrap; min-height: auto; padding: 14px 0; gap: 14px; }
+            .brand-logo { height: 48px; max-height: 52px; }
             .nav-links { order: 3; width: 100%; justify-content: center; gap: 20px; }
             .search-form { order: 2; width: auto; flex: 1; }
             .slider-wrapper { height: 260px; border-radius: var(--radius-lg); }
@@ -794,7 +796,7 @@
     <!-- Header & Navigation -->
     <header>
         <div class="container navbar">
-            <!-- Brand Logo Image -->
+            <!-- Brand Logo Image (Enlarged & Clear) -->
             <a href="index.html" class="brand" aria-label="NexStore Home">
                 <img src="https://i.ibb.co/1JwpGF7J/file-00000000206881fd97aabfae01de1d3e.png" alt="NexStore Logo" class="brand-logo">
             </a>
