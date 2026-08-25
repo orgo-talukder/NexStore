@@ -31,15 +31,15 @@
             --success: #10B981;
             --star: #F59E0B;
             --error: #EF4444;
-            --border-color: rgba(255, 255, 255, 0.07);
-            --border-hover: rgba(59, 130, 246, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(59, 130, 246, 0.45);
             
             --font-main: 'Inter', sans-serif;
             --font-heading: 'Outfit', sans-serif;
-            --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --radius-xl: 20px;
             --radius-lg: 16px;
-            --radius-md: 12px;
+            --radius-md: 14px;
             --radius-sm: 8px;
         }
 
@@ -214,7 +214,7 @@
            Page Header & Hero Intro
            ========================================= */
         .page-intro {
-            padding: 40px 0 24px 0;
+            padding: 36px 0 20px 0;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -232,14 +232,14 @@
             gap: 6px;
             padding: 4px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.6px;
             background: rgba(59, 130, 246, 0.12);
             color: var(--accent-primary);
             border: 1px solid rgba(59, 130, 246, 0.25);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .page-title {
@@ -247,12 +247,12 @@
             font-size: 32px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #fff;
         }
 
         .page-subtitle {
-            font-size: 15px;
+            font-size: 14.5px;
             color: var(--text-secondary);
             line-height: 1.5;
         }
@@ -282,8 +282,8 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 16px 22px;
-            margin-bottom: 32px;
+            padding: 14px 20px;
+            margin-bottom: 28px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -361,107 +361,182 @@
         }
 
         /* =========================================
-           Standard App Grid & Cards
+           Professional Redesigned App Cards
            ========================================= */
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
             margin-bottom: 60px;
         }
 
         .app-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 18px;
+            border-radius: var(--radius-lg);
+            padding: 20px;
             display: flex;
-            gap: 16px;
+            flex-direction: column;
+            justify-content: space-between;
             transition: var(--transition);
             cursor: pointer;
             position: relative;
+            min-height: 180px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .app-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             border-color: var(--border-hover);
             background: var(--bg-card-hover);
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2);
+        }
+
+        /* App Card Top Row */
+        .app-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 12px;
         }
 
         .app-icon {
-            width: 66px;
-            height: 66px;
+            width: 64px;
+            height: 64px;
             border-radius: 16px;
             object-fit: cover;
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             flex-shrink: 0;
             transition: transform 0.3s ease;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
         }
 
         .app-card:hover .app-icon {
             transform: scale(1.05);
         }
 
-        .app-info {
+        .app-header-info {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             min-width: 0;
+        }
+
+        .app-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
         }
 
         .app-title {
             font-family: var(--font-heading);
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 3px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 1.2;
         }
 
         .official-badge {
             color: var(--success);
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
         }
 
+        .app-category-tag {
+            display: inline-block;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            background: rgba(59, 130, 246, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        /* App Card Body (Description) */
         .app-desc {
-            font-size: 12.5px;
+            font-size: 13px;
             color: var(--text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: 16px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-height: 1.45;
+            line-height: 1.5;
+            text-decoration: none !important;
         }
 
-        .app-meta {
+        /* App Card Footer (Meta + Action) */
+        .app-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto;
+            gap: 8px;
+        }
+
+        .app-meta-pills {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 11.5px;
-            color: var(--text-muted);
-            font-weight: 500;
+            flex-wrap: nowrap;
         }
 
         .meta-pill {
             display: inline-flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             background: rgba(255, 255, 255, 0.04);
-            padding: 2px 7px;
-            border-radius: 5px;
+            padding: 4px 8px;
+            border-radius: 6px;
             border: 1px solid var(--border-color);
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
         }
 
-        .meta-pill.star { color: var(--star); }
-        .meta-pill.cat { color: var(--accent-primary); }
+        .meta-pill.star {
+            color: var(--star);
+            background: rgba(245, 158, 11, 0.08);
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .meta-pill.size {
+            color: var(--text-muted);
+        }
+
+        .get-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--accent-primary);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .app-card:hover .get-action-btn {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
 
         /* =========================================
            YouTube Shimmer Skeletons
@@ -469,12 +544,14 @@
         .skeleton-shimmer-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 18px;
+            border-radius: var(--radius-lg);
+            padding: 20px;
             display: flex;
-            gap: 16px;
+            flex-direction: column;
+            justify-content: space-between;
             position: relative;
             overflow: hidden;
+            min-height: 180px;
         }
 
         .shimmer-wave {
@@ -495,11 +572,12 @@
             border-radius: var(--radius-sm);
         }
 
-        .skel-icon { width: 66px; height: 66px; border-radius: 16px; flex-shrink: 0; }
+        .skel-icon { width: 64px; height: 64px; border-radius: 16px; flex-shrink: 0; }
         .skel-line { height: 12px; margin-bottom: 8px; }
-        .skel-line.title { width: 65%; height: 16px; margin-bottom: 10px; }
-        .skel-line.desc { width: 90%; }
-        .skel-line.meta { width: 45%; height: 12px; margin-bottom: 0; margin-top: 4px; }
+        .skel-line.title { width: 75%; height: 18px; margin-bottom: 8px; }
+        .skel-line.tag { width: 40%; height: 12px; margin-bottom: 0; }
+        .skel-line.desc { width: 100%; height: 12px; margin-bottom: 6px; }
+        .skel-line.desc-short { width: 80%; height: 12px; margin-bottom: 14px; }
 
         /* =========================================
            States (Empty / Error)
@@ -602,7 +680,7 @@
     <!-- Header & Navigation -->
     <header>
         <div class="container navbar">
-            <!-- Brand Logo Image (Consistent with Index) -->
+            <!-- Brand Logo Image -->
             <a href="index.html" class="brand" aria-label="NexStore Home">
                 <img src="https://i.ibb.co/V05G0rcC/IMG-20260825-200138.png" alt="NexStore Logo" class="brand-logo">
             </a>
@@ -678,7 +756,7 @@
 
         <!-- Apps Container (Rendered via JS) -->
         <div id="all-apps-container" class="app-grid">
-            <!-- Shimmer Skeletons will be injected here during initial load -->
+            <!-- Shimmer Skeletons injected during loading -->
         </div>
 
     </main>
@@ -733,19 +811,31 @@
             }
         });
 
-        // --- Render Skeletons (YouTube Shimmer Effect) ---
+        // --- Render Modern Skeletons ---
         function renderSkeletons() {
             const container = document.getElementById('all-apps-container');
             let appSkel = '';
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < 6; i++) {
                 appSkel += `
                     <div class="skeleton-shimmer-card">
                         <div class="shimmer-wave"></div>
-                        <div class="skel-box skel-icon"></div>
-                        <div style="flex:1;">
-                            <div class="skel-box skel-line title"></div>
+                        <div style="display:flex;gap:16px;margin-bottom:12px;">
+                            <div class="skel-box skel-icon"></div>
+                            <div style="flex:1;">
+                                <div class="skel-box skel-line title"></div>
+                                <div class="skel-box skel-line tag"></div>
+                            </div>
+                        </div>
+                        <div>
                             <div class="skel-box skel-line desc"></div>
-                            <div class="skel-box skel-line meta"></div>
+                            <div class="skel-box skel-line desc-short"></div>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);">
+                            <div style="display:flex;gap:8px;">
+                                <div class="skel-box" style="width:45px;height:24px;border-radius:6px;"></div>
+                                <div class="skel-box" style="width:55px;height:24px;border-radius:6px;"></div>
+                            </div>
+                            <div class="skel-box" style="width:50px;height:24px;border-radius:8px;"></div>
                         </div>
                     </div>
                 `;
@@ -758,31 +848,66 @@
         // Global State
         let globalAppsList = [];
 
-        // App Card Generator Component
+        // --- Formatting Helpers ---
+        function formatCategory(cat) {
+            if (!cat) return 'Utility';
+            return cat
+                .split(/[-_]/)
+                .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' ');
+        }
+
+        function formatSize(size) {
+            if (!size) return 'Direct APK';
+            const strSize = String(size).trim();
+            if (/^\d+(\.\d+)?$/.test(strSize)) return `${strSize} MB`;
+            return strSize;
+        }
+
+        // --- Professional App Card Component ---
         function createAppCard(app) {
-            const icon = app.icon_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" fill="%230F172A"><rect width="66" height="66"/></svg>';
+            const icon = app.icon_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="%230F172A"><rect width="64" height="64"/></svg>';
             const name = app.name || 'Unknown App';
-            const shortDesc = app.short_description || 'Verified Nex application release.';
-            const rating = app.rating ? `★ ${app.rating}` : '★ 5.0';
-            const size = app.apk_size ? app.apk_size : 'Direct APK';
-            const category = app.category || 'Utility';
+            const shortDesc = app.short_description || 'Verified Nex official application release.';
+            const rating = app.rating ? Number(app.rating).toFixed(1) : '5.0';
+            const size = formatSize(app.apk_size);
+            const category = formatCategory(app.category);
 
             return `
                 <a href="app.html?id=${app.id}" class="app-card">
-                    <img src="${icon}" alt="${name}" class="app-icon" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'66\' height=\'66\' fill=\'%230F172A\'><rect width=\'66\' height=\'66\'/></svg>'">
-                    <div class="app-info">
-                        <div class="app-title">
-                            ${name}
-                            <span class="official-badge" title="Official Verified Build">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <!-- Top Header: Icon + Title + Category Tag -->
+                    <div class="app-card-header">
+                        <img src="${icon}" alt="${name}" class="app-icon" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'64\' height=\'64\' fill=\'%230F172A\'><rect width=\'64\' height=\'64\'/></svg>'">
+                        <div class="app-header-info">
+                            <div class="app-title-wrap">
+                                <h3 class="app-title" title="${name}">${name}</h3>
+                                <span class="official-badge" title="Official Verified Build">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                </span>
+                            </div>
+                            <span class="app-category-tag">${category}</span>
+                        </div>
+                    </div>
+
+                    <!-- Middle Body: Short Description -->
+                    <p class="app-desc">${shortDesc}</p>
+
+                    <!-- Bottom Footer: Rating + Size + Get Button -->
+                    <div class="app-card-footer">
+                        <div class="app-meta-pills">
+                            <span class="meta-pill star">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                ${rating}
+                            </span>
+                            <span class="meta-pill size">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                ${size}
                             </span>
                         </div>
-                        <p class="app-desc">${shortDesc}</p>
-                        <div class="app-meta">
-                            <span class="meta-pill star">${rating}</span>
-                            <span class="meta-pill cat">${category}</span>
-                            <span>${size}</span>
-                        </div>
+                        <span class="get-action-btn">
+                            Get
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </span>
                     </div>
                 </a>
             `;
@@ -872,11 +997,10 @@
                     categories.forEach(cat => {
                         const opt = document.createElement('option');
                         opt.value = cat.name || cat.id;
-                        opt.textContent = cat.name;
+                        opt.textContent = formatCategory(cat.name);
                         sel.appendChild(opt);
                     });
                 } else {
-                    // Fallback categories if database table is empty
                     const defaultCats = ['Productivity', 'Utility', 'Tools', 'Security', 'Entertainment', 'AI', 'Education'];
                     defaultCats.forEach(c => {
                         const opt = document.createElement('option');
@@ -894,7 +1018,6 @@
         async function fetchAllApps() {
             setProgress(30);
             try {
-                // Fetch categories and published apps
                 await loadCategories();
                 setProgress(60);
 
@@ -917,7 +1040,6 @@
                 }
 
                 if (categoryParam) {
-                    // Select category if option exists
                     const catSelect = document.getElementById('category-filter');
                     for (let i = 0; i < catSelect.options.length; i++) {
                         if (catSelect.options[i].value.toLowerCase() === categoryParam.toLowerCase()) {
